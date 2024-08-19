@@ -10,17 +10,17 @@ class ProductService {
         }
     }
 
-    static async createProducts(productsData) {
-        try {
-            const createdProducts = await Promise.all(productsData.map(async (productData) => {
-                const product = new productModel(productData);
-                return await product.save();
-            }));
-            return createdProducts;
-        } catch (error) {
-            throw error;
-        }
-    }  
+    // static async createProducts(productsData) {
+    //     try {
+    //         const createdProducts = await Promise.all(productsData.map(async (productData) => {
+    //             const product = new productModel(productData);
+    //             return await product.save();
+    //         }));
+    //         return createdProducts;
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }  
 
     static async getAllProduct() {
         try {

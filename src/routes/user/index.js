@@ -3,7 +3,11 @@ const router = express.Router()
 const userController = require('../../controllers/user.controller')
 const middleware = require('../../middleware/middleware')
 
-router.get('/get-all-user', middleware.verifyAdmin, userController.getAllUser)
+// router.get('/get-all-user', middleware.verifyAdmin, userController.getAllUser)
+
+// deploy test
+router.get('/get-all-user', userController.getAllUser)
+
 // router.get('/get-all-user', userController.getAllUser)
 
 router.post('/create-user', middleware.verifyAdmin, userController.createUser)

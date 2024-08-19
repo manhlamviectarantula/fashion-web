@@ -4,7 +4,18 @@ const redisClient = require('../dbs/redis')
 
 class productController {
     createProduct = async (req, res) => {
-        const productData = req.body
+
+        const productData = req.body;
+    
+        const thumbnail = req.files['thumbnail']
+            ? req.files['thumbnail'][0].filename
+            : '';
+        const images = req.files['images']
+            ? req.files['images'].map((file) => file.filename)
+            : [];
+    
+        productData.thumbnail = thumbnail;
+        productData.images = images;
         try {
             const productCreate = await ProductService.createProduct(productData)
             res.send(productCreate)
@@ -13,15 +24,26 @@ class productController {
         }
     }
 
-    createProducts = async (req, res) => {
-        const productsData = req.body;
-        try {
-            const productsCreated = await ProductService.createProducts(productsData);
-            res.send(productsCreated);
-        } catch (error) {
-            return res.status(400).json({ error: error.message });
-        }
-    }  
+    // createProductEdit = async (req, res) => {
+    //     const productData = req.body
+
+    //     try {
+    //         const productCreate = await ProductService.createProduct(productData)
+    //         res.send(productCreate)
+    //     } catch (error) {
+    //         return res.status(400).json({ error: error.message })
+    //     }
+    // }
+
+    // createProducts = async (req, res) => {
+    //     const productsData = req.body;
+    //     try {
+    //         const productsCreated = await ProductService.createProducts(productsData);
+    //         res.send(productsCreated);
+    //     } catch (error) {
+    //         return res.status(400).json({ error: error.message });
+    //     }
+    // }
 
     getAllProduct = async (req, res) => {
         try {

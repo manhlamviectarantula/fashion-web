@@ -3,8 +3,18 @@ const router = express.Router()
 const productController = require('../../controllers/product.controller')
 const middleware = require('../../middleware/middleware')
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage })
+
 router.get('/get-all-product', productController.getAllProduct)
-router.post('/create-products', productController.createProducts)
 
 /**
  * @swagger
@@ -123,11 +133,11 @@ router.get('/get-one-product/:id', productController.getOneProduct)
  *     tags:
  *       - THÊM, SỬA, XÓA SẢN PHẨM
  *     summary: Create a new product
- *     description: Create a new product with the provided details.
+ *     description: Create a new product with the provided details, including uploading images.
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -149,21 +159,17 @@ router.get('/get-one-product/:id', productController.getOneProduct)
  *                 type: number
  *                 format: float
  *                 description: The price of the product.
- *                 example: 19.99
+ *                 example: 10000
  *               thumbnail:
  *                 type: string
- *                 description: The URL of the product's thumbnail image.
- *                 example: https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/455388/item/vngoods_56_455388.jpg?width=750
+ *                 format: binary
+ *                 description: The thumbnail image of the product.
  *               images:
  *                 type: array
  *                 items:
  *                   type: string
- *                 description: The URLs of additional images of the product.
- *                 example: [
- *                   "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/455388/sub/goods_455388_sub14.jpg?width=750",
- *                   "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/455388/sub/goods_455388_sub17.jpg?width=750",
- *                   "https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/455388/sub/vngoods_455388_sub23.jpg?width=750"
- *                 ]
+ *                   format: binary
+ *                 description: The additional images of the product.
  *               brand:
  *                 type: string
  *                 description: The brand of the product.
@@ -200,11 +206,14 @@ router.get('/get-one-product/:id', productController.getOneProduct)
  *       201:
  *         description: Successfully created the product.
  *       400:
- *         description: Bad request, invalid input data
+ *         description: Bad request, invalid input data.
  *       500:
- *         description: Internal server error
+ *         description: Internal server error.
  */
-router.post('/create-product', middleware.verifyAdmin, productController.createProduct)
+router.post('/create-product', middleware.verifyAdmin, upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'images', maxCount: 3 },
+]), productController.createProduct)
 
 /**
  * @swagger
