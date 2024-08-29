@@ -31,6 +31,20 @@ class userController {
         }
     }
 
+    updatePass = async (req, res) => {
+        const userID = req.params.id
+        const oldPass = req.body.oldPass
+        const newPass = req.body.newPass
+        const cNewPass = req.body.cNewPass
+        try {
+            const updatedPass = await UserService.updatePass(userID, oldPass, newPass, cNewPass)
+            res.send(updatedPass)
+        } catch (error) {
+            return res.status(400).json({ error: error.message })
+        }
+
+    }
+
     deleteUser = async (req, res) => {
         const userID = req.params.id
         try {
@@ -43,11 +57,11 @@ class userController {
 
     getOneUser = async (req, res) => {
         const userID = req.params.id
-        try{
+        try {
             const detailUser = await UserService.getOneUser(userID)
             res.send(detailUser)
-        }catch(error){
-            return res.status(400).json({error: error.message})
+        } catch (error) {
+            return res.status(400).json({ error: error.message })
         }
     }
 

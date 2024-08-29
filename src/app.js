@@ -10,6 +10,8 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use('/src/uploads', express.static('src/uploads'))
+// app.use(express.static(__dirname + '/uploads'))
 swaggerSetup(app);
 
 require('dotenv').config()

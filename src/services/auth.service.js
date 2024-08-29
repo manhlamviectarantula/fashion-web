@@ -14,7 +14,7 @@ class AuthService {
         )
     }
 
-    static async generateRefreshToken(user){
+    static async generateRefreshToken(user) {
         return jwt.sign({
             id: user.id,
             admin: user.isAdmin
@@ -27,7 +27,7 @@ class AuthService {
     static async registerUser(name, email, password, cPassword, phone, address) {
         try {
 
-            if (!name || !email || !password || !cPassword || !phone || !address){
+            if (!name || !email || !password || !cPassword || !phone || !address) {
                 throw new Error('Chưa nhập đủ thông tin')
             }
 
@@ -69,7 +69,7 @@ class AuthService {
 
     static async loginUser(email, password, res) {
         try {
-            if(!email || !password){
+            if (!email || !password) {
                 throw new Error('Chưa nhập đủ thông tin')
             }
 
@@ -87,13 +87,13 @@ class AuthService {
                 const accessToken = await AuthService.generateAccessToken(user)
                 const refreshToken = await AuthService.generateRefreshToken(user)
                 res.cookie("refreshToken", refreshToken, {
-                    httpOnly:true,
-                    secure:false,
-                    path:"/",
-                    samSite:"strict"
+                    httpOnly: true,
+                    secure: false,
+                    path: "/",
+                    samSite: "strict"
                 })
                 const { password, ...others } = user._doc
-                // console.log(accessToken)
+                // console.log(refreshToken)
                 return { ...others, accessToken }
             }
         } catch (error) {

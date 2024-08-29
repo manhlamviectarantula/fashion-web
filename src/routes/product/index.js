@@ -6,7 +6,7 @@ const middleware = require('../../middleware/middleware')
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads')
+        cb(null, 'src/uploads')
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname)
@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 router.get('/get-all-product', productController.getAllProduct)
+router.post('/create-products', productController.createProducts)
 
 /**
  * @swagger

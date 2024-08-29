@@ -10,17 +10,17 @@ class ProductService {
         }
     }
 
-    // static async createProducts(productsData) {
-    //     try {
-    //         const createdProducts = await Promise.all(productsData.map(async (productData) => {
-    //             const product = new productModel(productData);
-    //             return await product.save();
-    //         }));
-    //         return createdProducts;
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }  
+    static async createProducts(productsData) {
+        try {
+            const createdProducts = await Promise.all(productsData.map(async (productData) => {
+                const product = new productModel(productData);
+                return await product.save();
+            }));
+            return createdProducts;
+        } catch (error) {
+            throw error;
+        }
+    }  
 
     static async getAllProduct() {
         try {
@@ -34,7 +34,8 @@ class ProductService {
     static async getProduct(page, limit, qCategory, search, sex, brand, country, sortField, priceFrom, priceTo) {
         try {
             sex = sex ? [sex.toLowerCase()] : ["nam", "nữ", "unisex"];
-            brand = brand ? [brand.toLowerCase()] : ["uniqlo", "versace", "jeansx", "shirttt", "dry-ex"];
+            // brand = brand ? [brand.toLowerCase()] : ["uniqlo", "versace", "jeansx", "shirttt", "dry-ex"];
+            brand = brand ? brand : ["Uniqlo", "Versace", "Jeansx", "ShirtTT", "DRY-EX"]
             country = country ? [country.toLowerCase()] : ["trung quốc", "mỹ", "úc"];
 
             const sort = sortField.split(",")

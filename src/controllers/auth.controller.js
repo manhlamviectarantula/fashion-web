@@ -15,13 +15,8 @@ class authController {
     loginUser = async (req, res) => {
         const { email, password } = req.body
         try {
-            // const userCache = await getUserLoginCache()
-            // if (userCache) {
-            //     return res.send(userCache)
-            // }
-
             const result = await AuthService.loginUser(email, password, res)
-            // setUserLoginCache(result)
+            // console.log('req.cookies.refreshToken', cookies.refreshToken)
             return res.send(result)
         } catch (error) {
             return res.status(400).json({ error: error.message })
@@ -29,9 +24,10 @@ class authController {
     }
 
     logoutUser = async (req, res) => {
-        console.log('req.cookies.refreshToken', req.cookies.refreshToken)
+        // console.log('req.cookies.refreshToken', req.cookies.refreshToken)
         try {
             res.clearCookie('refreshToken')
+            // console.log('111')
             return res.status(200).json({
                 status: 'OK',
                 message: 'Logout Success'

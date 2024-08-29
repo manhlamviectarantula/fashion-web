@@ -35,15 +35,15 @@ class productController {
     //     }
     // }
 
-    // createProducts = async (req, res) => {
-    //     const productsData = req.body;
-    //     try {
-    //         const productsCreated = await ProductService.createProducts(productsData);
-    //         res.send(productsCreated);
-    //     } catch (error) {
-    //         return res.status(400).json({ error: error.message });
-    //     }
-    // }
+    createProducts = async (req, res) => {
+        const productsData = req.body;
+        try {
+            const productsCreated = await ProductService.createProducts(productsData);
+            res.send(productsCreated);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 
     getAllProduct = async (req, res) => {
         try {
@@ -83,7 +83,7 @@ class productController {
     getProduct = async (req, res) => {
         const qCategory = req.query.category;
         const page = parseInt(req.query.page, 10) - 1 || 0;
-        const limit = parseInt(req.query.limit, 10) || 6;
+        const limit = parseInt(req.query.limit, 10) || 9;
         const search = req.query.search || "";
         const sex = req.query.sex || "";
         const brand = req.query.brand || "";
