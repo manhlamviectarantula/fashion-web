@@ -1,38 +1,137 @@
-.App {
-  text-align: center;
+/*** footer start ***/
+a {
+    text-decoration: none !important;
+    /* color: white !important; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.footer {
+    background: var(--bs-dark);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.footer .footer-item a,
+.footer .footer-item p {
+    color: var(--bs-white);
+    line-height: 40px;
+    font-size: 17px;
+    transition: 0.5s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.footer .footer-item a:hover {
+    letter-spacing: 2px;
+    color: #a5e9ee !important;
+}
+
+/*** Footer End ***/
+
+/*** copyright Start ***/
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--bs-dark) !important;
+}
+/*** copyright end ***/
+
+
+/* start features area css
+============================================================================================ */
+@media (max-width: 768px) {
+    .features-area {
+      padding-top: 0; } }
+  .features-area .col-lg-3:last-child .single-features {
+    border-right: 0; }
+    @media (max-width: 575px) {
+      .features-area .col-lg-3:last-child .single-features {
+        margin-top: 30px; } }
+  .features-area .col-lg-3:nth-child(3) .single-features,
+  .features-area .col-lg-3:nth-child(4) .single-features {
+    margin-bottom: 0; }
+  
+  .features-inner {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px 0; }
+  
+  .single-features {
+    text-align: center;
+    border-right: 1px solid #eeeeee; }
+    @media (max-width: 991px) {
+      .single-features {
+        border-right: none;
+        margin-bottom: 30px; } }
+    .single-features .f-icon {
+      margin-bottom: 20px; }
+      .single-features .f-icon img {
+        -webkit-transition: all 0.3s ease 0s;
+        -moz-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s; }
+    .single-features h6 {
+      font-size: 16px;
+      margin-bottom: 0; }
+    .single-features p {
+      margin-bottom: 0; }
+    .single-features:hover .f-icon img {
+      opacity: .5; }
+  
+  /* start features area css
+  ============================================================================================ */
+
+  
+  /*** testimonial Start ***/
+  .testimonials-block blockquote {
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.testimonials-block .name {
+    display: block;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.testimonials-block .designation {
+    display: block;
+    font-size: 0.875rem;
+}
+
+.testimonials-block .carousel-indicators{
+    bottom: -2.5rem !important;
+}
+/*** testimonial end ***/
+
+/* Product List */
+.sider-label{
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar{
+  background: rgba(0,0,0,.03);
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #e6e7e9;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.product-list .card:hover{
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px;
 }
+
+.category-list .card:hover{
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px;
+}
+
+.product-list .sort{
+  background: rgba(0,0,0,.03);
+  margin-bottom: 10px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid #e6e7e9;
+}
+
+.card-body p {
+  margin: 0;
+}
+
